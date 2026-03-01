@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <rect width="800" height="500" fill="#1a1a2e"/>
+  <rect x="50" y="80" width="200" height="150" rx="8" fill="#16213e" stroke="#8f1f1f" stroke-width="2"/>
+  <text x="150" y="165" font-family="Arial" font-size="14" fill="#aaa" text-anchor="middle">Elektronik</text>
+  <rect x="300" y="60" width="200" height="180" rx="8" fill="#16213e" stroke="#8f1f1f" stroke-width="2"/>
+  <text x="400" y="155" font-family="Arial" font-size="14" fill="#aaa" text-anchor="middle">Restposten</text>
+  <rect x="550" y="90" width="200" height="140" rx="8" fill="#16213e" stroke="#8f1f1f" stroke-width="2"/>
+  <text x="650" y="165" font-family="Arial" font-size="14" fill="#aaa" text-anchor="middle">Retouren</text>
+  <text x="400" y="400" font-family="Georgia,serif" font-size="32" font-weight="bold" fill="#8f1f1f" text-anchor="middle">Liquidato</text>
+  <text x="400" y="440" font-family="Arial" font-size="14" fill="#aaa" text-anchor="middle">B2B Direktankauf von Restposten &amp; Retouren</text>
+</svg>
