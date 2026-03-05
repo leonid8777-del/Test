@@ -3,13 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="light" />
-  <title>Liquidato Ankauf-Anfragen - Offline Prototyp</title>
+  <title>Panda Snack Spiel</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div id="app"></div>
-  <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
+  <main class="game" aria-live="polite">
+    <h1>Panda Snack Spiel</h1>
+    <p class="subtitle">Drücke den Knopf und füttere den Panda 🐼</p>
+
+    <div class="scene">
+      <div id="panda" class="panda" role="img" aria-label="Panda">🐼</div>
+      <div id="food" class="food" aria-hidden="true">🍙</div>
+    </div>
+
+    <button id="feedButton" class="feed-button" type="button">Panda füttern</button>
+    <p id="status" class="status">Der Panda wartet auf Essen.</p>
+    <p id="counter" class="counter">Snacks gegessen: 0</p>
+  </main>
+
   <script src="app.js"></script>
 </body>
 </html>
