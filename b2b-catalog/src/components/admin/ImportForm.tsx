@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Upload, FileText, Eye, Check, Edit3 } from 'lucide-react';
+import { Upload, Eye, Check, Edit3 } from 'lucide-react';
 import { parseMultipleOffers, type ParsedOffer } from '@/lib/whatsapp-parser';
 import type { Category, UnitType, ConditionCode, Currency } from '@/types/database';
 
@@ -222,6 +222,11 @@ export function ImportForm({ categories, onPublish }: ImportFormProps) {
                 )}
                 {offer.short_description && (
                   <div className="col-span-2 text-gray-500">{offer.short_description}</div>
+                )}
+                {offer.internal_notes && (
+                  <div className="col-span-2 text-xs bg-yellow-50 border border-yellow-200 rounded p-2">
+                    <strong>Interne Info:</strong> {offer.internal_notes}
+                  </div>
                 )}
               </div>
             )}
