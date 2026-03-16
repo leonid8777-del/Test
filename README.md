@@ -46,3 +46,13 @@
 - Keine externen Libraries, keine Build-Pipeline, keine CDNs.
 - Alle E-Mails sind simuliert und in der Outbox sichtbar.
 - Bitrix-Sync ist ein Stub: schreibt Timeline-Event + fake `remote_id`.
+
+## Neue Mini-App: FocusFlow (To-do)
+- Datei: `todo-app/index.html`
+- Starten per Doppelklick oder via lokaler Server-URL:
+  - `python3 -m http.server`
+  - `http://localhost:8000/todo-app/`
+- Features:
+  - Aufgabe hinzufuegen, abhaken, loeschen
+  - Filter: Alle / Offen / Erledigt
+  - Persistenz per `localStorage`
