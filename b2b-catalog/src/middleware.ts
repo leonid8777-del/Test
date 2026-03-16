@@ -1,48 +1,38 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { createServerClient } from '@supabase/ssr';
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({
+  const response = NextResponse.next({
     request: { headers: request.headers },
   });
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
-          response = NextResponse.next({ request: { headers: request.headers } });
-          cookiesToSet.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options)
-          );
-        },
-      },
-    }
-  );
-
-  const { data: { user } } = await supabase.auth.getUser();
   const pathname = request.nextUrl.pathname;
 
-  // Public routes: catalog pages, login, home
+  // Add noindex header for catalog pages
+  if (pathname.startsWith('/catalog/')) {
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+  }
+
+  // When Supabase is configured, enforce auth on protected routes
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('your-project')) {
+    // Demo mode: no auth enforcement
+    return response;
+  }
+
+  // Public routes always pass through
   if (
     pathname.startsWith('/catalog/') ||
     pathname === '/login' ||
     pathname === '/'
   ) {
-    // Add noindex header for catalog pages
-    if (pathname.startsWith('/catalog/')) {
-      response.headers.set('X-Robots-Tag', 'noindex, nofollow');
-    }
     return response;
   }
 
-  // Protected routes require authentication
-  if (!user) {
+  // With real Supabase: check session cookie presence as lightweight guard
+  const hasSession = request.cookies.getAll().some(c => c.name.startsWith('sb-'));
+  if (!hasSession) {
     const loginUrl = new URL('/login', request.url);
     loginUrl.searchParams.set('redirect', pathname);
     return NextResponse.redirect(loginUrl);
