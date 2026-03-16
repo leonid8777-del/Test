@@ -16,11 +16,11 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
 
-    // Demo mode: accept any login and route based on email prefix
+    // Demo mode: use window.location to bypass any middleware redirect loops
     if (email.startsWith('admin')) {
-      router.push('/admin');
+      window.location.href = '/admin';
     } else {
-      router.push('/manager');
+      window.location.href = '/manager';
     }
     setLoading(false);
   };
